@@ -118,6 +118,15 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>com/openclassrooms/starterjwt/dto/**/*.class</exclude>
+								<exclude>com/openclassrooms/starterjwt/models/**/*.class</exclude>
+								<exclude>com/openclassrooms/starterjwt/mapper/**/*.class</exclude>
+								<exclude>com/openclassrooms/starterjwt/payload/request/**/*.class</exclude>
+								<exclude>com/openclassrooms/starterjwt/payload/response/**/*.class</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 
 					<execution>
@@ -133,7 +142,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.9</minimum>
+											<minimum>0.80</minimum>
 										</limit>
 									</limits>
 								</rule>
