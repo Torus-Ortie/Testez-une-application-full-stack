@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static com.openclassrooms.starterjwt.utils.TestConstant.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
@@ -21,9 +20,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
-
-    private static final Long MOCK_USER_ID = 1L;
-    private static final Long NON_EXISTING_USER_ID = 2L;
 
     @InjectMocks
     private UserService userService;
@@ -36,31 +32,31 @@ class UserServiceTest {
     @BeforeEach
     void setUp() {
         mockUser = new User(
-                MOCK_USER_ID,
-                TEST_USER_EMAIL,
-                TEST_USER_LAST_NAME,
-                TEST_USER_FIRST_NAME,
-                TEST_USER_PASSWORD,
-                false,
-                LocalDateTime.now(),
-                LocalDateTime.now()
+            1L,
+            "user@studio.com",
+            "Studio",
+            "User",
+            "test!1234",
+            false,
+            LocalDateTime.now(),
+            LocalDateTime.now()
         );
     }
 
     @Test
     @DisplayName("Delete User")
     void shouldDeleteUserWhenDeleteIsCalled() {
-        userService.delete(MOCK_USER_ID);
+        userService.delete(1L);
 
-        verify(userRepository).deleteById(MOCK_USER_ID);
+        verify(userRepository).deleteById(1L);
     }
 
     @Test
     @DisplayName("Find User By Existing ID")
     void shouldReturnUserWhenFindByIdIsCalledWithExistingId() {
-        when(userRepository.findById(MOCK_USER_ID)).thenReturn(Optional.of(mockUser));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
 
-        User actualUser = userService.findById(MOCK_USER_ID);
+        User actualUser = userService.findById(1L);
 
         assertEquals(mockUser, actualUser);
     }
@@ -68,9 +64,9 @@ class UserServiceTest {
     @Test
     @DisplayName("Find User By Non-Existing ID")
     void shouldReturnNullWhenFindByIdIsCalledWithNonExistingId() {
-        when(userRepository.findById(NON_EXISTING_USER_ID)).thenReturn(Optional.empty());
+        when(userRepository.findById(2L)).thenReturn(Optional.empty());
 
-        User actualUser = userService.findById(NON_EXISTING_USER_ID);
+        User actualUser = userService.findById(2L);
 
         assertNull(actualUser);
     }
