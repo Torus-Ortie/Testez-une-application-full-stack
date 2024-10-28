@@ -31,7 +31,7 @@ public class AuthControllerIntegrationTest {
     @Test
     public void testLogin_Success() throws Exception {
         LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("user@studio.com");
+        loginRequest.setEmail("user1@studio.com");
         loginRequest.setPassword("password");
 
         String jsonLoginRequest = new ObjectMapper().writeValueAsString(loginRequest);

@@ -32,9 +32,9 @@ public class UserControllerIntegrationTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk()) 
             .andExpect(jsonPath("$.id", is(2))) 
-            .andExpect(jsonPath("$.email", is("user@studio.com"))) 
+            .andExpect(jsonPath("$.email", is("user1@studio.com"))) 
             .andExpect(jsonPath("$.lastName", is("Studio"))) 
-            .andExpect(jsonPath("$.firstName", is("User"))); 
+            .andExpect(jsonPath("$.firstName", is("User1"))); 
     }
 
     @Test 
@@ -46,7 +46,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test 
-    @WithMockUser(username = "user@studio.com") 
+    @WithMockUser(username = "user1@studio.com") 
     public void testDelete_Success() throws Exception {
         mockMvc.perform(delete("/api/user/{id}", 2L) 
             .contentType(MediaType.APPLICATION_JSON)) 
@@ -54,7 +54,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test 
-    @WithMockUser(username = "user@studio.com") 
+    @WithMockUser(username = "user999@studio.com") 
     public void testDelete_UserNotFound() throws Exception {
         mockMvc.perform(delete("/api/user/{id}", 999L) 
             .contentType(MediaType.APPLICATION_JSON))

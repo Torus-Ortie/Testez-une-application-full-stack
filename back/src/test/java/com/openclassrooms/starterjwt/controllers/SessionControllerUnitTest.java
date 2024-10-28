@@ -90,8 +90,8 @@ public class SessionControllerUnitTest {
         session.setTeacher(new Teacher(1L, "DELAHAYE", "Margot", null, null));
         session.setDescription("This is a test session.");
         session.setUsers(Arrays.asList(
-            new User(2L, "user1@studio.com", "Studio", "User1", "test!1234", false, null, null),
-            new User(3L, "user2@studio.com", "Studio", "User2", "test!12345", false, null, null)
+            new User(2L, "user1@studio.com", "Studio", "User1", "password", false, null, null),
+            new User(3L, "user2@studio.com", "Studio", "User2", "password", false, null, null)
         ));
     }
 

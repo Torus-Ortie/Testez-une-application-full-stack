@@ -40,7 +40,7 @@ public class SessionControllerIntegrationTest {
         Long id = 1L;
         String expectedName = "Yoga";
         Long expectedTeacherId = 1L;
-        String expectedDescription = "Yoga session";
+        String expectedDescription = "Yoga session 1";
     
         mockMvc.perform(get("/api/session/{id}", id))
             .andExpect(status().isOk())
