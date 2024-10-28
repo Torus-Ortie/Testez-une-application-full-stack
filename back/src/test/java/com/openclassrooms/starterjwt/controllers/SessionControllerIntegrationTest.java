@@ -38,16 +38,16 @@ public class SessionControllerIntegrationTest {
     @WithMockUser
     public void testFindById_Success() throws Exception {
         Long id = 1L;
-        String expectedName = "Séance de Yoga matin";
+        String expectedName = "Yoga";
         Long expectedTeacherId = 1L;
-        String expectedDescription = "Une séance de yoga revitalisante pour bien commencer la journée.";
+        String expectedDescription = "Yoga session";
     
         mockMvc.perform(get("/api/session/{id}", id))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(id.intValue())))
-        .andExpect(jsonPath("$.name", is(expectedName)))
-        .andExpect(jsonPath("$.teacher_id", is(expectedTeacherId.intValue())))
-        .andExpect(jsonPath("$.description", is(expectedDescription)));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id", is(id.intValue())))
+            .andExpect(jsonPath("$.name", is(expectedName)))
+            .andExpect(jsonPath("$.teacher_id", is(expectedTeacherId.intValue())))
+            .andExpect(jsonPath("$.description", is(expectedDescription)));
     }
 
     @Test
@@ -56,14 +56,14 @@ public class SessionControllerIntegrationTest {
         Long id = 9999L;
 
         mockMvc.perform(get("/api/session/{id}", id))
-        .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
     @Test
     @WithMockUser
     public void testFindAll_Integration() throws Exception {
         mockMvc.perform(get("/api/session"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$", not(empty())));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", not(empty())));
     }
     
     @Test
@@ -78,8 +78,8 @@ public class SessionControllerIntegrationTest {
         String sessionDtoJson = new ObjectMapper().writeValueAsString(sessionDto);
     
         mockMvc.perform(post("/api/session")
-                .contentType(APPLICATION_JSON)
-                .content(sessionDtoJson))
+            .contentType(APPLICATION_JSON)
+            .content(sessionDtoJson))
             .andExpect(status().isOk());
     }
 
@@ -96,8 +96,8 @@ public class SessionControllerIntegrationTest {
         Long id = 1L;
 
         mockMvc.perform(put("/api/session/{id}", id)
-                .contentType(APPLICATION_JSON)
-                .content(sessionDtoJson))
+            .contentType(APPLICATION_JSON)
+            .content(sessionDtoJson))
             .andExpect(status().isOk());
     }
 

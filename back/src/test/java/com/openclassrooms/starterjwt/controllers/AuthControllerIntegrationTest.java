@@ -37,10 +37,10 @@ public class AuthControllerIntegrationTest {
         String jsonLoginRequest = new ObjectMapper().writeValueAsString(loginRequest);
 
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonLoginRequest))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.token", is(notNullValue())));
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonLoginRequest))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.token", is(notNullValue())));
     }
 
     @Test
@@ -52,9 +52,9 @@ public class AuthControllerIntegrationTest {
         String jsonLoginRequest = new ObjectMapper().writeValueAsString(loginRequest);
 
         mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonLoginRequest))
-                .andExpect(status().isUnauthorized());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonLoginRequest))
+            .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -68,10 +68,10 @@ public class AuthControllerIntegrationTest {
         String jsonSignupRequest = new ObjectMapper().writeValueAsString(signupRequest);
 
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonSignupRequest))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message", is("User registered successfully!")));
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonSignupRequest))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.message", is("User registered successfully!")));
     }
 
     @Test
@@ -83,8 +83,8 @@ public class AuthControllerIntegrationTest {
         String jsonSignupRequest = new ObjectMapper().writeValueAsString(signupRequest);
 
         mockMvc.perform(post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonSignupRequest))
-                .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonSignupRequest))
+            .andExpect(status().isBadRequest());
     }
 }

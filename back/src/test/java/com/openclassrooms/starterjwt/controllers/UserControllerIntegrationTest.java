@@ -29,35 +29,35 @@ public class UserControllerIntegrationTest {
     @WithMockUser
     public void testFindById_Success() throws Exception {
         mockMvc.perform(get("/api/user/{id}", 2L)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()) 
-                .andExpect(jsonPath("$.id", is(2))) 
-                .andExpect(jsonPath("$.email", is("user@studio.com"))) 
-                .andExpect(jsonPath("$.lastName", is("Studio"))) 
-                .andExpect(jsonPath("$.firstName", is("User"))); 
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk()) 
+            .andExpect(jsonPath("$.id", is(2))) 
+            .andExpect(jsonPath("$.email", is("user@studio.com"))) 
+            .andExpect(jsonPath("$.lastName", is("Studio"))) 
+            .andExpect(jsonPath("$.firstName", is("User"))); 
     }
 
     @Test 
     @WithMockUser 
     public void testFindById_UserNotFound() throws Exception {
         mockMvc.perform(get("/api/user/{id}", 999L) 
-                .contentType(MediaType.APPLICATION_JSON)) 
-                .andExpect(status().isNotFound());
+            .contentType(MediaType.APPLICATION_JSON)) 
+            .andExpect(status().isNotFound());
     }
 
     @Test 
     @WithMockUser(username = "user@studio.com") 
     public void testDelete_Success() throws Exception {
         mockMvc.perform(delete("/api/user/{id}", 2L) 
-                .contentType(MediaType.APPLICATION_JSON)) 
-                .andExpect(status().isOk()); 
+            .contentType(MediaType.APPLICATION_JSON)) 
+            .andExpect(status().isOk()); 
     }
 
     @Test 
     @WithMockUser(username = "user@studio.com") 
     public void testDelete_UserNotFound() throws Exception {
         mockMvc.perform(delete("/api/user/{id}", 999L) 
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
     }
 }

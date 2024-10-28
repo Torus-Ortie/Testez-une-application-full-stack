@@ -87,74 +87,54 @@ public class AuthControllerUnitTest {
         when(auth.getPrincipal()).thenReturn(userDetails);
 
         mockMvc.perform(post("/api/auth/login")
-        .contentType("application/json")
-        .content(jsonRequest))
-        .andExpect(status().isOk());
+            .contentType("application/json")
+            .content(jsonRequest))
+            .andExpect(status().isOk());
 
-        // Verify isAdmin
         verify(userRepository).findByEmail("user@studio.com");
         assertTrue(user.isAdmin());
 
-        // Verify interaction with authenticationManager
         verify(authenticationManager).authenticate(new UsernamePasswordAuthenticationToken("user@studio.com", "test!1234"));
     }
 
     @Test
     public void testRegisterUser() throws Exception {
-        // Arrange
-        // Création d'une nouvelle demande d'inscription
         SignupRequest signupRequest = new SignupRequest();
         signupRequest.setEmail("user@studio.com");
         signupRequest.setPassword("test!1234");
         signupRequest.setFirstName("User");
         signupRequest.setLastName("Studio");
-        // Conversion de l'objet SignupRequest en chaîne JSON
+
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonRequest = objectMapper.writeValueAsString(signupRequest);
-        // Simulation du comportement de userRepository.existsByEmail pour retourner true
-        // Cela signifie que l'email est déjà utilisé
+
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
         when(passwordEncoder.encode(anyString())).thenReturn("passwordEncoded");
 
-        // Act
-        // Exécution de la requête POST sur "/api/auth/register"
         mockMvc.perform(post("/api/auth/register")
-                .contentType("application/json")
-                .content(jsonRequest))
-
-        // Assert
-        // Vérification que le statut de la réponse est 400 (Bad Request)
-        // et que le message de la réponse est "Error: Email is already taken!"
-                .andExpect(status().isOk())
-                .andExpect(content().string("{\"message\":\"User registered successfully!\"}"));
+            .contentType("application/json")
+            .content(jsonRequest))
+            .andExpect(status().isOk())
+            .andExpect(content().string("{\"message\":\"User registered successfully!\"}"));
     }
 
     @Test
     public void testRegisterUser_BadRequest() throws Exception {
-        // Arrange
-        // Création d'une nouvelle demande d'inscription
         SignupRequest signupRequest = new SignupRequest();
         signupRequest.setEmail("user@studio.com");
         signupRequest.setPassword("test!1234");
         signupRequest.setFirstName("User");
         signupRequest.setLastName("Studio");
-        // Conversion de l'objet SignupRequest en chaîne JSON
+
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonRequest = objectMapper.writeValueAsString(signupRequest);
-        // Simulation du comportement de userRepository.existsByEmail pour retourner true
-        // Cela signifie que l'email est déjà utilisé
+
         when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
-        // Act
-        // Exécution de la requête POST sur "/api/auth/register"
         mockMvc.perform(post("/api/auth/register")
-                .contentType("application/json")
-                .content(jsonRequest))
-
-        // Assert
-        // Vérification que le statut de la réponse est 400 (Bad Request)
-        // et que le message de la réponse est "Error: Email is already taken!"
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("{\"message\":\"Error: Email is already taken!\"}"));
+            .contentType("application/json")
+            .content(jsonRequest))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().string("{\"message\":\"Error: Email is already taken!\"}"));
     }
 }
