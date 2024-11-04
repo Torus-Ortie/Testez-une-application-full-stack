@@ -1,4 +1,4 @@
-# Yoga
+# Yoga App Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
@@ -59,7 +59,7 @@ Generate coverage report (you should launch e2e test before):
 
 Report is available here:
 
-> front/coverage/lcov-report/index.html
+> front/coverage/jest/lcov-report/index.html
 
 #### Unitary test
 

@@ -6,7 +6,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts', '<rootDir>/node_modules/@hirez_io/observer-spy/dist/setup-auto-unsubscribe.js'],
   bail: false,
   verbose: false,
-  collectCoverage: false,
+  collectCoverage: true,
   coverageDirectory: './coverage/jest',
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/'],
