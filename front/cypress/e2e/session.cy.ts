@@ -61,7 +61,6 @@ describe('Sessions page', () => {
         },
     ]
   
-    //admin session information
     const admin = {
         token: 'token',
         type: 'Bearer',
